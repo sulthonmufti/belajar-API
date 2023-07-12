@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Streaming Hunter X Hunter DUB Indo</title>
+  <title>Website Streaming Video</title>
   <style>
     #player {
       width: 640px;
@@ -13,32 +13,28 @@
     }
 
     #recommendations {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       margin-top: 20px;
     }
 
     .recommendation-item {
       width: 200px;
+      margin: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Streaming Hunter X Hunter DUB Indo</h1>
+  <h1>Selamat Datang di Website Streaming Video</h1>
 
   <div id="player"></div>
 
   <div id="recommendations">
-    <div class="recommendation-item" onclick="changeVideo('zUFLEzAE5L0')">
-      <iframe width="200" height="113" src="https://www.youtube.com/embed/zUFLEzAE5L0"></iframe>
-    </div>
-    <div class="recommendation-item" onclick="changeVideo('3fKzqTtLPo4')">
-      <iframe width="200" height="113" src="https://www.youtube.com/embed/3fKzqTtLPo4"></iframe>
-    </div>
-    <div class="recommendation-item" onclick="changeVideo('UrafwbEer7E')">
-      <iframe width="200" height="113" src="https://www.youtube.com/embed/UrafwbEer7E"></iframe>
-    </div>
+    <div class="recommendation-item" onclick="changeVideo('VzUFLEzAE5L0')">Rekomendasi 1</div>
+    <div class="recommendation-item" onclick="changeVideo('V3fKzqTtLPo4')">Rekomendasi 2</div>
+    <div class="recommendation-item" onclick="changeVideo('UrafwbEer7E')">Rekomendasi 3</div>
   </div>
 
   <script src="https://www.youtube.com/iframe_api"></script>
@@ -52,7 +48,7 @@
         width: '640',
         videoId: currentVideoId,
         playerVars: {
-          'key': 'YAIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk'
+          'key': 'AIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk'
         },
         events: {
           'onReady': onPlayerReady,
@@ -73,15 +69,17 @@
       player.loadVideoById(newVideoId);
       currentVideoId = newVideoId;
 
-      // Pindahkan video sebelumnya menjadi rekomendasi terakhir
-      const currentVideoElement = document.getElementById(`recommendation-${newVideoId}`);
+      // Memperbarui tampilan rekomendasi video
       const recommendationsElement = document.getElementById('recommendations');
-      const lastRecommendationElement = recommendationsElement.lastElementChild;
+      const recommendationItems = recommendationsElement.getElementsByClassName('recommendation-item');
 
-      if (lastRecommendationElement) {
-        recommendationsElement.insertBefore(currentVideoElement, lastRecommendationElement.nextSibling);
-      } else {
-        recommendationsElement.appendChild(currentVideoElement);
+      // Memindahkan video sebelumnya ke rekomendasi terakhir
+      for (let i = 0; i < recommendationItems.length; i++) {
+        const recommendationId = recommendationItems[i].getAttribute('data-video-id');
+        if (recommendationId === newVideoId) {
+          recommendationsElement.insertBefore(recommendationItems[i], recommendationsElement.firstChild);
+          break;
+        }
       }
     }
   </script>
