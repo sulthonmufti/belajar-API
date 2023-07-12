@@ -11,18 +11,31 @@
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let player;
-  
+
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
         height: '360',
         width: '640',
-        videoId: 'NBZ9Ro6UKV8', // Ganti dengan ID video YouTube yang ingin Anda tampilkan
+        videoId: 'NBZ9Ro6UKV8',
+ // Ganti dengan ID video YouTube yang ingin Anda tampilkan
         playerVars: {
-          'key': 'AIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk' // Gantilah 'YOUR_API_KEY' dengan API Key Anda
+            'key': 'AIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk'
+        },
+
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
         }
       });
     }
+
+    function onPlayerReady(event) {
+      event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+      // Jika diperlukan, Anda dapat menambahkan logika tambahan di sini
+    }
   </script>
-  
 </body>
 </html>
