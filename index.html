@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Website Streaming Video</title>
+  <title>Streaming Hunter X Hunter DUB Indo</title>
+  <style>
+    #player {
+      width: 640px;
+      height: 360px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #recommendations {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      margin-top: 20px;
+    }
+
+    .recommendation-item {
+      width: 200px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Selamat Datang di Website Streaming Video</h1>
+  <h1>Streaming Hunter X Hunter DUB Indo</h1>
 
   <div id="player"></div>
+
+  <div id="recommendations">
+    <div class="recommendation-item" onclick="changeVideo('zUFLEzAE5L0')">
+      <iframe width="200" height="113" src="https://www.youtube.com/embed/zUFLEzAE5L0"></iframe>
+    </div>
+    <div class="recommendation-item" onclick="changeVideo('3fKzqTtLPo4')">
+      <iframe width="200" height="113" src="https://www.youtube.com/embed/3fKzqTtLPo4"></iframe>
+    </div>
+    <div class="recommendation-item" onclick="changeVideo('UrafwbEer7E')">
+      <iframe width="200" height="113" src="https://www.youtube.com/embed/UrafwbEer7E"></iframe>
+    </div>
+  </div>
 
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let player;
+    let currentVideoId = 'SORU1A-lSyo'; // Video utama yang sedang diputar
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('player', {
         height: '360',
         width: '640',
-        videoId: 'NBZ9Ro6UKV8',
- // Ganti dengan ID video YouTube yang ingin Anda tampilkan
+        videoId: currentVideoId,
         playerVars: {
-            'key': 'AIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk'
+          'key': 'YAIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk'
         },
-
         events: {
           'onReady': onPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -35,6 +67,22 @@
 
     function onPlayerStateChange(event) {
       // Jika diperlukan, Anda dapat menambahkan logika tambahan di sini
+    }
+
+    function changeVideo(newVideoId) {
+      player.loadVideoById(newVideoId);
+      currentVideoId = newVideoId;
+
+      // Pindahkan video sebelumnya menjadi rekomendasi terakhir
+      const currentVideoElement = document.getElementById(`recommendation-${newVideoId}`);
+      const recommendationsElement = document.getElementById('recommendations');
+      const lastRecommendationElement = recommendationsElement.lastElementChild;
+
+      if (lastRecommendationElement) {
+        recommendationsElement.insertBefore(currentVideoElement, lastRecommendationElement.nextSibling);
+      } else {
+        recommendationsElement.appendChild(currentVideoElement);
+      }
     }
   </script>
 </body>
