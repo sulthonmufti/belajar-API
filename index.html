@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Website Streaming Video</title>
+</head>
+<body>
+  <h1>Selamat Datang di Website Streaming Video</h1>
+
+  <div id="player"></div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player;
+  
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: 'VNBZ9Ro6UKV8', // Ganti dengan ID video YouTube yang ingin Anda tampilkan
+        playerVars: {
+          'key': 'AIzaSyB10Z3SLeo1jrY7VyynMwtBNbBv7cZ4oTk' // Gantilah 'YOUR_API_KEY' dengan API Key Anda
+        }
+      });
+    }
+  </script>
+  
+</body>
+</html>
